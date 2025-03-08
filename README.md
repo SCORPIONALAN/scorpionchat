@@ -31,4 +31,12 @@ Lo unico diferente es la sintaxis que hay sobre el $or de Mongo para cargar ya s
 Implementacion de daisyUI, y routing en react.
 De igual forma se creo una implementacion de seguridad con el verificador isChecked que hicimos en el backend, esto con el fin de guardarlo en un estado global con zustand y permita navegar libremente por las demas rutas en caso de tener un token autorizado, caso contrario solo tendra acceso a la parte de iniciar sesion y crear usuario.
 En el estado global existen 4 "atributos" y un metodo, este metodo lo que se encarga es la parte de la autenticacion con axios dirigiendose al endpoint del backend /auth/check, con el fin de establecer si el usuario esta autenticado desde un inicio o no. Pero aqui hay una cosa a aclarar, de momento como no hemos convergido el front con el back, tenemos que hacer uso de una libreria para lograr estos resultados, esto se da mediante cors, en donde le pasaremos la ruta del origen de la URL de react y le decimos que existen credenciales, en nuestro caso son los Tokens y los headers.
+
 ![alt text](images/image-1.png)
+
+
+## Quinto avance
+En este dia me enfoque al desarrollo frontend de crear cuenta en la aplicacion, no cabe mucho que resaltar mas que hacer una validacion para ver si los datos ingresados son correctos, dar notificaciones con toast, cambiar el estado global para poder iniciar sesion al mandar el formulario los campos correspondientes.
+De paso implemente el salir de la sesion en el estado golbarl unicamente usando una instancia de axios al endpoint correspondiente.
+### TODO
+        Hice mal algo, pues hay iconos que no se muestran, en un futuro lo resolvere

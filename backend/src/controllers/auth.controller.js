@@ -36,7 +36,7 @@ export const signup = async (req, res) => {
                 fullname: newUser.fullName,
                 email: newUser.email,
                 profilePic: newUser.profilePic,
-            })
+            }).json({message:"Que felicidad! Creaste un usuario :)"})
         }else{
             return res.status(400).json({message: "Que pena, hubo un problema al crear tu cuenta, intenta de nuevo"});
         }
