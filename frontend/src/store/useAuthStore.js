@@ -7,8 +7,8 @@ export const useAuthStore = create((set) => ({
     isSigningUp: false,
     isLoggingIng: false,
     isUpdatingProfile: false,
-
     isCheckingAuth:true,
+
     checkAuth: async() => {
         try {
             const res = await axiosInstance.get("/auth/check");
@@ -25,7 +25,7 @@ export const useAuthStore = create((set) => ({
             // Mandamos la informacion del usuario al backend para recibir respuesta
             const res = await axiosInstance.post("/auth/signup", data);
             set({authUser: res.data});
-            toast.success("Cuenta creada sin problemas");
+            toast.success('Cuenta creada correctamente');
 
         } catch (error) {
             toast.error("Algo paso mal, favor de revisar: " + error.response.data.message)
@@ -33,13 +33,43 @@ export const useAuthStore = create((set) => ({
             set({isSigningUp: false})
         }
     },
+    login: async(data)=>{
+        set({isLoggingIng: true})
+        try {
+            //Mandamos al usuario al backend de iniciar sesion
+            const res = await axiosInstance.post("/auth/login", data);
+            set({authUser : res.data})
+            toast.success("Sesion correctamente iniciada")
+        } catch (error) {
+            toast.error(error.response.data.message)
+        } finally {
+            set({isLoggingIng: false})
+        }
+    },
+
+
     logout: async () =>{
         try {
-            const res = await axiosInstance.post("/auth/logout");
+            await axiosInstance.post("/auth/logout");
             set({authUser:null});
             toast.success("cuenta cerrada correctamente");
         } catch (error) {
-            toast.error("Algo paso mal, favor de revisar: " + error.response.data.message)
+            toast.error(error.response.data.message);
+        }
+    },
+
+    updateProfile: async (data) =>{
+        set({isUpdatingProfile: true});
+        try {
+            const res = await axiosInstance.put('/auth/update-profile', data)
+            set({authUser: res.data});
+            toast.success('Actualizaste la foto correctamente');
+
+        } catch (error) {
+            toast.error(error.response.data.message)
+        } finally{
+            set({isUpdatingProfile: false})
         }
     }
-}))
+
+}));

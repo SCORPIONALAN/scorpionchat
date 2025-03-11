@@ -41,7 +41,7 @@ const SignUpPage = () => {
         <div className='w-full max-w-md space-y-8'>
           <div className='text-center mb-8'>
             <div className='flex flex-col items-center gap-2 group'>
-              <div className='size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors'>
+              <div className='size-12 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors z-40'>
                 <MessageSquare className='size-6 text-primary'/>
               </div>
               <h1 className='text-2xl font-bold mt-2'>Crea una cuenta!</h1>
@@ -54,7 +54,7 @@ const SignUpPage = () => {
                 <span className='labal-text font-medium'>Nombre y apellido</span>
               </label>
               <div className="relative">
-                <div className='absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none'>
+                <div className='absolute inset-y-0 left-0 pl-2 flex items-center pointer-events-none z-40'>
                   <User className="size-5 text-base-content/40"/>
                 </div>
                 <input
@@ -72,7 +72,7 @@ const SignUpPage = () => {
                 <span className='labal-text font-medium'>Email</span>
               </label>
               <div className="relative">
-                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-40'>
                   <Mail className="size-5 text-base-content/40"/>
                 </div>
                 <input
@@ -90,7 +90,7 @@ const SignUpPage = () => {
                 <span className='labal-text font-medium'>Password</span>
               </label>
               <div className="relative">
-                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none'>
+                <div className='absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-40'>
                   <Lock className="size-5 text-base-content/40"/>
                 </div>
                 <input
@@ -105,7 +105,7 @@ const SignUpPage = () => {
                 className='absolute inset-y-0 right-0 pr-3 flex items-center'
                 onClick={()=>setShowPassword(!showPassword)}
                 >{
-                  showPassword?(<EyeOff className='size-5 text-base-content/40'/>):(<Eye className='size-5 text-base-content/40'/>)
+                  showPassword?(<EyeOff className='size-5 text-base-content/40'/>):(<Eye className='size-5 text-base-content/40 z-40'/>)
                 }</button>
               </div>
             </div>

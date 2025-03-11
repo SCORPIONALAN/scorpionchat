@@ -38,5 +38,10 @@ En el estado global existen 4 "atributos" y un metodo, este metodo lo que se enc
 ## Quinto avance
 En este dia me enfoque al desarrollo frontend de crear cuenta en la aplicacion, no cabe mucho que resaltar mas que hacer una validacion para ver si los datos ingresados son correctos, dar notificaciones con toast, cambiar el estado global para poder iniciar sesion al mandar el formulario los campos correspondientes.
 De paso implemente el salir de la sesion en el estado golbarl unicamente usando una instancia de axios al endpoint correspondiente.
-### TODO
-        Hice mal algo, pues hay iconos que no se muestran, en un futuro lo resolvere
+
+
+## Sexto avance
+En este dia segui en la parte del frontend para el navbar, en esta tendra un conditional rendering en el que si existe un usuario saldran mas botones para salir de sesion y personalizar el perfil, en caso de no estar autenticado solo tendra las opciones de cnfiguracion general de la APP (color del tema).
+Hice el forntend de la parte de login, aqui es casi exactamente igual que la parte de signup. De paso corregi los errores del quinto avance que eran relacionados a los iconos, lo que pasaba era la superposicion de elementos entre absolute y relative, ya que los iconos se empalmaban por ser cargados primero, asi que le asigne un z-index mayor.
+
+De igual forma seguimos en la parte del frontend, pero en esta ocasion me enfoque en la parte del editar perfil del usuario. Codigo un tanto repetitivo, ya que como manejamos procesos asincronos establecemos configuraciones en el UI para ver el circulo de carga o que el boton no se pueda seleccionar. Lo unico interesante a resaltar es la parte del formulario en que subimos una imagen y el evento que dispara en el que hacemos uso del FileReader para leer la informacion como url y pasar la imagen a un formato de 64, ponemos la imagen para actualizar el UI, actualizamos el link de la imagen en mongo y finalmente o mejor dicho antes del mongo, guardar la imagen en el bucket que tenemos en cloudinary.
