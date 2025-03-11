@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 import daisyui from 'daisyui';
+import { TEMAS } from './src/constants';
 export default {
   content: [
     "./index.html",
@@ -11,5 +12,8 @@ export default {
   plugins: [
     daisyui
   ],
+  daisyui:{
+    themes: TEMAS
+  }
 }
 

@@ -45,3 +45,13 @@ En este dia segui en la parte del frontend para el navbar, en esta tendra un con
 Hice el forntend de la parte de login, aqui es casi exactamente igual que la parte de signup. De paso corregi los errores del quinto avance que eran relacionados a los iconos, lo que pasaba era la superposicion de elementos entre absolute y relative, ya que los iconos se empalmaban por ser cargados primero, asi que le asigne un z-index mayor.
 
 De igual forma seguimos en la parte del frontend, pero en esta ocasion me enfoque en la parte del editar perfil del usuario. Codigo un tanto repetitivo, ya que como manejamos procesos asincronos establecemos configuraciones en el UI para ver el circulo de carga o que el boton no se pueda seleccionar. Lo unico interesante a resaltar es la parte del formulario en que subimos una imagen y el evento que dispara en el que hacemos uso del FileReader para leer la informacion como url y pasar la imagen a un formato de 64, ponemos la imagen para actualizar el UI, actualizamos el link de la imagen en mongo y finalmente o mejor dicho antes del mongo, guardar la imagen en el bucket que tenemos en cloudinary.
+
+### Nota importante
+Las versiones de tailwindCSS v4 y v3 son totalmente distintas, ahora ya no se hace nada en el config.js, puesto que todo puede ser asignado a una hoja de estilo. Pero seguiremos usando la v3 ya que es con la que sigo aprendiendo.
+
+## Septimo avance
+En este dia me encargue de hacer el UI de la parte de configuraciones de la pagina, esto con el motivo de cargar todos los estilos con los que cuenta daisyUI, por eso puse la nota anterior.
+Para lograr guardar los estilos creamos un contexto global con zustand para guardarlos. En este estado global sus estados default es el tema que este almacenado en el local storage, en caso de que no, se dispara una funcion para rescatar desde las preferencias del buscador el tema que le gusta al usuario, y si algo falla entra de reserva el tema claro.
+Ahora para mandar a llamar todas los temas de DaisyUI tuve que leer la documentacion de la version 3, por lo que solamente en el tailwind.config se agrega daisyui: TEMAS, pero estos temas como son constantes los copie y pegue en un archivo para no tener tanta cosa en el config de tailwind.
+Retomando el estado global con Zustand, lo que importa es que para establecer el color debemos pasar un tema y este tema sera guardado en el localStorage y despues aplicamos la renderizacion con un set().
+En la parte de react en las configuraciones solo mandamos a importar ese estado global, hacemos un map a todas las constantes que tenemos, le damos formato a un boton por cada constante y cuando se da click dispara la accion del setTheme del tema que estemos clickeando
