@@ -52,7 +52,7 @@ export const sendMessage = async (req, res) =>{
         });
         await newMessage.save();
         //          LAS FUNCIONALIDADES DE TIEMPO REAL CON SOCKET.IO
-        res.status(201).json(newMEssage);
+        res.status(201).json(newMessage);
     } catch (error) {
         console.error("Error en el controlador de mandar mensajes: ", error.message);
         res.status(500).json({error:"Error interno del servidor"});

@@ -5,7 +5,6 @@ import LoginPage from "./pages/LoginPage";
 import SettingsPage from "./pages/SettingsPage";
 import HomePage from './pages/HomePage';
 import ProfilePage from "./pages/ProfilePage";
-import { axiosInstance } from "./lib/axios";
 import { useAuthStore } from "./store/useAuthStore";
 import { useEffect } from "react";
 import {Loader} from 'lucide-react';
@@ -17,12 +16,12 @@ const App = () => {
   useEffect(()=>{
     checkAuth()
   }, [checkAuth]);
-  console.log({authUser});
+  //console.log({authUser});
 
   // Pantalla de carga en caso de que el usuario no este autenticado para llevarlo al login
   if(isCheckingAuth && !authUser){
     return(
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-screen" data-theme={theme}>
       <Loader className="size-10 animate-spin"/>
       </div>
     );
