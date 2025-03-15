@@ -1,6 +1,7 @@
 import User from "../models/user.model.js";
 import Message from "../models/message.model.js"
 import cloudinary from "../lib/cloudinary.js";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 
 export const getUsersForSidebar = async(req, res)=>{
     try {
@@ -52,6 +53,12 @@ export const sendMessage = async (req, res) =>{
         });
         await newMessage.save();
         //          LAS FUNCIONALIDADES DE TIEMPO REAL CON SOCKET.IO
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        // Si el usuario esta en linea
+        if(receiverSocketId){
+            // Emit es broadcast, asi que el to dirige unicamente el cargado de componente al usuario que estoy apuntando y este activo
+            io.to(receiverSocketId).emit('newMessage', newMessage);
+        }
         res.status(201).json(newMessage);
     } catch (error) {
         console.error("Error en el controlador de mandar mensajes: ", error.message);
