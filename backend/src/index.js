@@ -40,7 +40,7 @@ if(process.env.NODE_ENV === "production" ){
         res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'))
     })
 }
-
+// 14:55
 
 server.listen(PORT, () => {
     console.log("server running on port " + PORT);
