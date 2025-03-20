@@ -80,9 +80,9 @@ const LoginPage = () => {
             </div>
 
             {/* BOTON QUE EN BASE AL FETCHING VA A MOSTRAR UN CIRCULO DE CARGA O INICIA SESION */}
-            <button type='submit' className='btn btn-primary w-full' disabled={isLoggingIn}>
+            <button type='submit' className='btn btn-primary w-full' disabled={isLoggingIng}>
               {
-                isLoggingIn ? (
+                isLoggingIng ? (
                   <>
                     <Loader2 className='h-5 w-5 animate-spin'/>
                     Loading...
