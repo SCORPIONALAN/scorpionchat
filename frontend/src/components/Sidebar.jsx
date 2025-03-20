@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useChatStore } from '../store/useChatStore'
 import SidebarSkeleton from './skeletons/SidebarSkeleton';
 import { Users } from 'lucide-react';
@@ -7,10 +7,23 @@ import { useAuthStore } from '../store/useAuthStore';
 const Sidebar = () => {
     const {getUsers, users, selectedUser, setSelectedUser, isUsersLoading} = useChatStore();
     const {onlineUsers} = useAuthStore();
+    const [showOnline, setShowOnline] = useState(false);
+    const [refresh, setRefresh] = useState(false);
     /*14:53 */
     useEffect(()=>{
-        getUsers()
-    }, [getUsers])
+        getUsers();
+    }, [getUsers]);
+
+    useEffect(() => {
+        const unsubscribe = useChatStore.subscribe(state => {
+            setRefresh(prev => !prev); //Forzar re-render cuando cambie el estado
+        });
+
+        return () => unsubscribe(); // Cleanup al desmontar
+    }, []);
+
+    const filteredUsers = showOnline? users.filter(user => onlineUsers.includes(user._id)): users;
+
     {/*cuando terminos de cargar los contactos pasaremos a mostrarlos, de momento mostraremos un esqueleto vacio*/}
     if(isUsersLoading) return <SidebarSkeleton />
   return (
@@ -21,9 +34,21 @@ const Sidebar = () => {
                 <span className='font-medium hidden lg:block'>Contacts</span>
             </div>
             {/*TODO Filtro en el online */}
+            <div className='mt-3 hidden lg:flex items-center gap-2'>
+                <label className='cursor-ponter flex items-center gap-2'>
+                    <input
+                    type='checkBox'
+                    checked = {showOnline}
+                    onChange={(e) => setShowOnline(e.target.checked)}
+                    className='checkbox checkbox-sm'
+                    />
+                    <span className='text-sm'>Conectados</span>
+                </label>
+                <span className='text-xs text-zinc-500'>({onlineUsers.length - 1})</span>
+            </div>
         </div>
         <div className='overflow-y-auto w-full py-3'>
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
                 <button
                 key={user._id}
                 onClick={() => setSelectedUser(user)}
@@ -54,6 +79,9 @@ const Sidebar = () => {
                     </div>
                 </button>
             ))}
+            {filteredUsers.length === 0 && (
+                <div className='text-center text-zinc-500 py-4'>No hay usuarios en linea</div>
+            )}
         </div>
     </aside>
   )

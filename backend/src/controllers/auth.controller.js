@@ -2,6 +2,7 @@ import cloudinary from "../lib/cloudinary.js";
 import { generateToken } from "../lib/utils.js";
 import User from "../models/user.model.js"
 import bcrypt from "bcryptjs";
+import { getReceiverSocketId, io } from "../lib/socket.js";
 
 export const signup = async (req, res) => {
     const {fullName, email, password} = req.body;
@@ -86,6 +87,12 @@ export const updateProfile = async (req, res) =>{
         const uploadResponse = await cloudinary.uploader.upload(profilePic);
         const updatedUser = await User.findByIdAndUpdate(userId, {profilePic:uploadResponse.secure_url}, {new:true});
         res.status(200).json(updatedUser);
+
+        //Uso de socketIO para actualizar el cambio en tiempo real
+        io.emit('ImageChange', {
+            userId: updatedUser._id,
+            profilePic: updatedUser.profilePic,
+        })
     } catch (error) {
         console.log("error en actualizar el perfil", error);
         res.status(500).json({message: "Error interno dentro del servidor"});

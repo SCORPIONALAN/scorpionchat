@@ -1,5 +1,15 @@
 {
-  "dependencies": {
-    "cors": "^2.8.5"
-  }
+  "name": "scorpionchat",
+  "version": "1.0.0",
+  "description": "Este proyecto que realizare, sera un ejemplo de simulacion de messenger o whatsapp, estare usando unica y exclusivamente herramientas de desarrollo para JS, esto en un enfoque de desarrollo MERN.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
+
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

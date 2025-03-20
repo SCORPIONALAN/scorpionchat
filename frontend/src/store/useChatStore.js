@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { toast } from 'react-hot-toast';
 import { axiosInstance } from '../lib/axios';
+import { useAuthStore } from './useAuthStore';
 
 export const useChatStore = create((set, get)=>({
     messages:[],
@@ -44,8 +45,21 @@ export const useChatStore = create((set, get)=>({
             toast.error(error.response.data.message);
         }
     },
-    /*      TODO                
-        Optimizar esta linea de codigo
-    */
+    //Para cargar al contenedor del chat y que este en tiempo real
+    subscribeToMessages: () =>{
+        const {selectedUser} = get();
+        if(!selectedUser) return; // si no hay usuario retorna
+        const socket = useAuthStore.getState().socket; // pasar el socket de authStore hasta aqui
+        socket.on('newMessage', (newMessage) =>{
+            if(newMessage.senderId !== selectedUser._id) return; //Si yo usuario 1 le mando mensaje a usuario 2, pero usuario 3 esta chateando, esta linea de codigo evita que usuario 3 vea mis mensajes o los mensajes de 2
+            set({messages:[...get().messages, newMessage]}) // Pasamos todos los mensajes y agregamos el nuevo al final
+        })
+
+    },
+    //Para cuando cerramos la pestania
+    unsubscribeToMessages:() => {
+        const socket = useAuthStore.getState().socket;
+        socket.off('newMessage');
+    },
     setSelectedUser: (selectedUser) => set({selectedUser})
 })) 
