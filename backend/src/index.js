@@ -36,7 +36,7 @@ if(process.env.NODE_ENV === "production" ){
     //Una vez dentro de un entorno de produccion concatenar lo armado del frontend con el backend
     app.use(express.static(path.join(__dirname, '../frontend/dist')));
     //EntryPoint de la aplicacion realizada en react
-    app.get('*', (requestAnimationFrame, res)=>{
+    app.get('*', (req, res)=>{
         res.sendFile(path.join(__dirname, '../frontend', 'dist', 'index.html'))
     })
 }
