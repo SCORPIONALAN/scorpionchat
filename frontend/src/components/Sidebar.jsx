@@ -22,7 +22,7 @@ const Sidebar = () => {
         return () => unsubscribe(); // Cleanup al desmontar
     }, []);
 
-    const filteredUsers = showOnline? users.filter(user => onlineUsers.includes(user._id)): users;
+    const filteredUsers = showOnline? users.filter(user => onlineUsers.includes(user._id)) : users;
 
     {/*cuando terminos de cargar los contactos pasaremos a mostrarlos, de momento mostraremos un esqueleto vacio*/}
     if(isUsersLoading) return <SidebarSkeleton />
