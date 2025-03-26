@@ -4,7 +4,7 @@ import toast from 'react-hot-toast';
 import {io} from 'socket.io-client'
 import { useChatStore } from './useChatStore';
 
-const BASE_URL= import.meta.env.MODE === 'devlopment'? 'http://localhost:5001' : '/';
+const BASE_URL= import.meta.env.MODE === 'development'? 'http://localhost:5001' : '/';
 export const useAuthStore = create((set, get) => ({
     authUser:null,
     isSigningUp: false,
@@ -95,12 +95,12 @@ export const useAuthStore = create((set, get) => ({
             set({onlineUsers: usersIds})
         });
         
-        socket.on('ImageChange', ({ userId, newProfilePic }) => {
+        socket.on('ImageChange', ({ userId, profilePic }) => {
             console.log("Recibido cambio de imagen en tiempo real para:", userId);
         
             useChatStore.setState(state => ({
                 users: state.users.map(user =>
-                    user._id === userId ? { ...user, profilePic: newProfilePic } : user
+                    user._id === userId ? { ...user, profilePic: profilePic } : user
                 )
             }));
         });
